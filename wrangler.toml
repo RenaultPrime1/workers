@@ -2,6 +2,9 @@ name = "kareudon-close-beta"
 main = "src/index.ts"
 compatibility_date = "2023-12-18"
 
+account_id = "de9ea9ebccd36ac576ef5e3842bbddcb" # ← Replace with your Account ID.
+workers_dev = true
+
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Note: Use secrets to store sensitive data.
 # Docs: https://developers.cloudflare.com/workers/platform/environment-variables
@@ -10,15 +13,15 @@ compatibility_date = "2023-12-18"
 
 # Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
 # Docs: https://developers.cloudflare.com/workers/runtime-apis/kv
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+[[kv_namespaces]]
+binding = "UDON_BETA_KV"
+id = "c2939a1d0a3c4d48bd84f0e2439c6be4"
 
 # Bind an R2 Bucket. Use R2 to store arbitrarily large blobs of data, such as files.
 # Docs: https://developers.cloudflare.com/r2/api/workers/workers-api-usage/
-# [[r2_buckets]]
-# binding = "MY_BUCKET"
-# bucket_name = "my-bucket"
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "kareudon"
 
 # Bind a Queue producer. Use this binding to schedule an arbitrary task that may be processed later by a Queue consumer.
 # Docs: https://developers.cloudflare.com/queues/get-started
