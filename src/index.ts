@@ -20,7 +20,7 @@ export default {
 
 		}
 
-		if (url.pathname === '/v1/submit-waitlist' && request.method === 'POST') {
+		if (url.pathname === '/v1/submit-waitlist' && request.method === 'POST' || 'OPTIONS') {
 			return submitWaitlist.fetch(request, env);
 		}
 
