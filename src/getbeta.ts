@@ -1,5 +1,5 @@
 export default {
-    async fetch(request: Request, env: { UDON_BETA_KV: KVNamespace, R2_BUCKET: R2Bucket }) {
+    async fetch(request: Request, env: any) {
         const url = new URL(request.url);
         const token = url.searchParams.get('token');
 
@@ -42,7 +42,7 @@ export default {
                 return new Response('Method Not Allowed', {
                     status: 405,
                     headers: {
-                        Allow: 'PUT, DELETE',
+                        Allow: 'GET',
                     },
                 });
         }

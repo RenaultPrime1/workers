@@ -1,6 +1,7 @@
 import handleRedirect from './redirect';
 import apiRouter from './router';
 import betaDL from './getbeta'
+import submitWaitlist from './waitlist'
 
 // Export a default object containing event handlers
 export default {
@@ -17,6 +18,10 @@ export default {
 			case '/getbeta':
 				return betaDL.fetch(request, env);
 
+		}
+
+		if (url.pathname === '/v1/submit-waitlist' && request.method === 'POST') {
+			return submitWaitlist.fetch(request, env);
 		}
 
 		if (url.pathname.startsWith('/v1/')) {

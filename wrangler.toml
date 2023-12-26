@@ -17,6 +17,10 @@ workers_dev = true
 binding = "UDON_BETA_KV"
 id = "c2939a1d0a3c4d48bd84f0e2439c6be4"
 
+[[kv_namespaces]]
+binding = "UDON_WAITLIST_KV"
+id = "5754abc299594083ae66cd6b1ae2f330"
+
 # Bind an R2 Bucket. Use R2 to store arbitrarily large blobs of data, such as files.
 # Docs: https://developers.cloudflare.com/r2/api/workers/workers-api-usage/
 [[r2_buckets]]
