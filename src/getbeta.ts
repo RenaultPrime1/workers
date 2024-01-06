@@ -1,5 +1,11 @@
+export interface Env {
+    UDON_BETA_KV: KVNamespace;
+    R2_BUCKET: R2Bucket;
+}
+
+
 export default {
-    async fetch(request: Request, env: any) {
+    async fetch(request: Request, env: Env, ctx: ExecutionContext) {
         const url = new URL(request.url);
         const token = url.searchParams.get('token');
 

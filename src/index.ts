@@ -3,6 +3,12 @@ import apiRouter from './router';
 import betaDL from './getbeta'
 import submitWaitlist from './waitlist'
 
+export interface Env {
+	UDON_BETA_KV: KVNamespace;
+	UDON_WAITLIST_KV: KVNamespace;
+	R2_BUCKET: R2Bucket;
+}
+
 // Export a default object containing event handlers
 export default {
 	// The fetch handler is invoked when this worker receives a HTTP(S) request
@@ -16,18 +22,18 @@ export default {
 			// 	case '/redirect':
 			// 		return handleRedirect.fetch(request, env, ctx);
 			case '/getbeta':
-				return betaDL.fetch(request, env);
+				return betaDL.fetch(request, env, ctx);
 
 		}
 
 		if (url.pathname === '/v1/submit-waitlist' && request.method === 'POST' || 'OPTIONS') {
-			return submitWaitlist.fetch(request, env);
+			return submitWaitlist.fetch(request, env, ctx);
 		}
 
-		if (url.pathname.startsWith('/v1/')) {
-			// You can also use more robust routing
-			return apiRouter.handle(request);
-		}
+		// if (url.pathname.startsWith('/v1/')) {
+		// 	// You can also use more robust routing
+		// 	return apiRouter.handle(request);
+		// }
 
 		return new Response(
 			`<html><body><center><h1>403 forbidden</h1></center></body></html>`,

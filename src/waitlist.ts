@@ -1,5 +1,10 @@
+export interface Env {
+	UDON_WAITLIST_KV: KVNamespace;
+}
+
+
 export default {
-  async fetch(request: Request, env: any) {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext) {
     const url = new URL(request.url);
 
     const corsHeaders = {
