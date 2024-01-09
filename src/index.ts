@@ -3,11 +3,6 @@ import apiRouter from './router';
 import betaDL from './getbeta'
 import submitWaitlist from './waitlist'
 
-export interface Env {
-	UDON_BETA_KV: KVNamespace;
-	UDON_WAITLIST_KV: KVNamespace;
-	R2_BUCKET: R2Bucket;
-}
 
 // Export a default object containing event handlers
 export default {
@@ -26,7 +21,7 @@ export default {
 
 		}
 
-		if (url.pathname === '/v1/submit-waitlist' && request.method === 'POST' || 'OPTIONS') {
+		if (url.pathname === '/v1/submit-waitlist' && (request.method === 'POST' || 'OPTIONS')) {
 			return submitWaitlist.fetch(request, env, ctx);
 		}
 
@@ -36,7 +31,7 @@ export default {
 		// }
 
 		return new Response(
-			`<html><body><center><h1>403 forbidden</h1></center></body></html>`,
+			`<!DOCTYPE html><html><body><center><h1>403 forbidden</h1></center></body></html>`,
 			{
 				status: 403,
 				headers: { 'Content-Type': 'text/html' }

@@ -13,4 +13,11 @@ interface Env {
 	//
 	// Example binding to a Queue. Learn more at https://developers.cloudflare.com/queues/javascript-apis/
 	// MY_QUEUE: Queue;
+
+	UDON_BETA_KV: KVNamespace;
+	UDON_WAITLIST_KV: KVNamespace;
+
+	R2_BUCKET: R2Bucket;
+
+	UDON_BETA_DB: D1Database;
 }

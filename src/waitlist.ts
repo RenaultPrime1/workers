@@ -1,8 +1,3 @@
-export interface Env {
-	UDON_WAITLIST_KV: KVNamespace;
-}
-
-
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext) {
     const url = new URL(request.url);
@@ -18,7 +13,12 @@ export default {
     }
 
     // Parse the request body as JSON
-    const data: { timestamp: string, email: string } = await request.json();
+    let data: { timestamp: string, email: string };
+    try {
+      data = await request.json();
+    } catch (error) {
+      return new Response('Invalid JSON in request body', { status: 400, headers: corsHeaders });
+    }
     const timestamp = data.timestamp;
     const email = data.email;
 
