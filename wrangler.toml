@@ -21,6 +21,11 @@ id = "c2939a1d0a3c4d48bd84f0e2439c6be4"
 binding = "UDON_WAITLIST_KV"
 id = "5754abc299594083ae66cd6b1ae2f330"
 
+[[d1_databases]]
+binding = "DB" 
+database_name = "kareudon-beta"
+database_id = "f9251097-09d9-4aa5-8ca2-135e24b1df62"
+
 # Bind an R2 Bucket. Use R2 to store arbitrarily large blobs of data, such as files.
 # Docs: https://developers.cloudflare.com/r2/api/workers/workers-api-usage/
 [[r2_buckets]]

@@ -1,41 +1,16 @@
-import handleRedirect from './redirect';
-import apiRouter from './router';
-import betaDL from './getbeta'
-import submitWaitlist from './waitlist'
+import { Hono } from 'hono'
 
+import api_v2 from './v2route'
 
-// Export a default object containing event handlers
-export default {
-	// The fetch handler is invoked when this worker receives a HTTP(S) request
-	// and should return a Response (optionally wrapped in a Promise)
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		// You'll find it helpful to parse the request.url string into a URL object. Learn more at https://developer.mozilla.org/en-US/docs/Web/API/URL
-		const url = new URL(request.url);
+import getBeta from './getbeta'
 
-		// You can get pretty far with simple logic like if/switch-statements
-		switch (url.pathname) {
-			// 	case '/redirect':
-			// 		return handleRedirect.fetch(request, env, ctx);
-			case '/getbeta':
-				return betaDL.fetch(request, env, ctx);
+const api = new Hono()
 
-		}
+api.all('/', (c) => c.text('Udon!'))
+api.notFound((c) => c.text('404 not found', 404))
 
-		if (url.pathname === '/v1/submit-waitlist' && (request.method === 'POST' || 'OPTIONS')) {
-			return submitWaitlist.fetch(request, env, ctx);
-		}
+api.route('getbeta', getBeta)
 
-		// if (url.pathname.startsWith('/v1/')) {
-		// 	// You can also use more robust routing
-		// 	return apiRouter.handle(request);
-		// }
+api.route('v2', api_v2)
 
-		return new Response(
-			`<!DOCTYPE html><html><body><center><h1>403 forbidden</h1></center></body></html>`,
-			{
-				status: 403,
-				headers: { 'Content-Type': 'text/html' }
-			}
-		);
-	},
-};
+export default api
