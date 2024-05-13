@@ -40,8 +40,8 @@ submitWaitlist.all('/', async (c) => {
     }
 
     await c.env.DB.prepare(
-        `insert into users (email, email_md5, uuid, reg_timestamp) values (?, ?, ?, ?)`
-    ).bind([email, email_md5, uuid, sqlTimestamp]).run();
+        `insert into users (email, email_md5, uuid, reg_timestamp, dl_times) values (?, ?, ?, ?, ?)`
+    ).bind([email, email_md5, uuid, sqlTimestamp, "0"]).run();
 
     return c.text('Submitted successfully', 200);
 
